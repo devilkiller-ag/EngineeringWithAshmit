@@ -4,11 +4,12 @@
   "description": "A bloging application for Ashmit JaiSarita Gupta wher he can share  engineering stuffs he learns and do.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/devilkiller-ag/EngineeringWithAshmit.git"
+    "url": "https://github.com/devilkiller-ag/EngineeringWithAshmit"
   },
   "keywords": [
     "Blogging",
@@ -19,9 +20,12 @@
   "bugs": {
     "url": "https://github.com/devilkiller-ag/EngineeringWithAshmit/issues"
   },
-  "homepage": "https://github.com/devilkiller-ag/EngineeringWithAshmit#readme",
+  "homepage": "https://github.com/devilkiller-ag/EngineeringWithAshmit/README.md",
   "dependencies": {
-    "express": "^4.21.2",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
     "nodemon": "^3.1.9"
   }
 }
