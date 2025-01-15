@@ -36,11 +36,11 @@ async function handleUserSignup(req, res) {
     }
 
     // Step 3: Create a new user
-    const user = await User.create(
+    const user = await User.create({
         fullName,
         email,
         password
-    );
+    });
 
     if (!user) {
         return res.status(400).json({
