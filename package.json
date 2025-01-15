@@ -1,0 +1,27 @@
+{
+  "name": "engineering-with-ashmit",
+  "version": "1.0.0",
+  "description": "A bloging application for Ashmit JaiSarita Gupta wher he can share  engineering stuffs he learns and do.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devilkiller-ag/EngineeringWithAshmit.git"
+  },
+  "keywords": [
+    "Blogging",
+    "Engineering With Ashmit"
+  ],
+  "author": "Ashmit JaiSarita Gupta",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devilkiller-ag/EngineeringWithAshmit/issues"
+  },
+  "homepage": "https://github.com/devilkiller-ag/EngineeringWithAshmit#readme",
+  "dependencies": {
+    "express": "^4.21.2",
+    "nodemon": "^3.1.9"
+  }
+}
