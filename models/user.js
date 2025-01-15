@@ -1,4 +1,4 @@
-const { Schema, Model } = require('mongoose');
+const { Schema, model } = require('mongoose');
 const { createHmac, randomBytes } = require('crypto');
 
 
@@ -49,7 +49,7 @@ userSchema.pre('save', function (next) {
 })
 
 
-const User = Model('User', userSchema);
+const User = model('User', userSchema);
 
 
 module.exports = User;

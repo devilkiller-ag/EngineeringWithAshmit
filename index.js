@@ -1,6 +1,8 @@
 const path = require('path');
 const express = require('express');
 
+const userRoute = require('./routes/user');
+
 
 const app = express();
 const PORT = 8000;
@@ -13,6 +15,9 @@ app.set('views', path.resolve('./views'));
 app.get('/', (req, res) => {
     return res.render('home');
 });
+
+
+app.use('/user', userRoute);
 
 
 app.listen(PORT, () => {
