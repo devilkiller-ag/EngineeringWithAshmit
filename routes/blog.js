@@ -5,6 +5,7 @@ const express = require('express');
 const {
     handleCreateNewBlogPage,
     handleCreateNewBlog,
+    handleDisplayBlog,
 } = require('../controllers/blog');
 
 
@@ -23,8 +24,9 @@ const upload = multer({ storage: storage });
 
 const router = express.Router();
 
-
 router.get('/create-new', handleCreateNewBlogPage);
+
+router.get('/:id', handleDisplayBlog);
 
 router.post('/', upload.single('coverImage'), handleCreateNewBlog);
 

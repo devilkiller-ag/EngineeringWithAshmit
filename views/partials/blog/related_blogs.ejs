@@ -1,0 +1,27 @@
+<% if (allUserBlogs.length) { %>
+<aside aria-label="Related articles" class="py-8 lg:py-24 bg-gray-50 dark:bg-gray-800">
+  <div class="px-4 mx-auto max-w-screen-xl">
+    <h2 class="mb-8 text-2xl font-bold text-gray-900 dark:text-white">Related blogs</h2>
+    <div class="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
+      <% allUserBlogs.forEach(blog => { %>
+      <article class="max-w-xs">
+        <a href="/blog/<%= blog._id %>">
+          <img src="<%= blog.coverImageURL %>" class="mb-5 rounded-lg" alt="Image 1">
+        </a>
+        <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
+          <a href="/blog/<%= blog._id %>"><%= blog.title %></a>
+        </h2>
+
+        <% if (blog.description) { %>
+        <p class="mb-4 text-gray-500 dark:text-gray-400"><%= blog.description %></p>
+        <% } %>
+
+        <a href="/blog/<%= blog._id %>" class="inline-flex items-center font-medium underline underline-offset-4 text-blue-600 dark:text-blue-500 hover:no-underline">
+          Read
+        </a>
+      </article>
+      <% }) %>
+    </div>
+  </div>
+</aside>
+<% } %>

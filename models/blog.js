@@ -6,6 +6,10 @@ const blogSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    description: {
+        type: String,
+        required: false,
+    },
     body: {
         type: String,
         required: true,
@@ -16,7 +20,7 @@ const blogSchema = new mongoose.Schema({
     },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        ref: 'user',
         required: true,
     }
 }, { timestamps: true });
