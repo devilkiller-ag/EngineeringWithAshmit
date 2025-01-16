@@ -2,6 +2,7 @@ const path = require('path');
 const dotenv = require('dotenv');
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const methodOverride = require('method-override');
 
 const Blog = require("./models/blog");
 const connectToMongoDB = require('./connection');
@@ -22,7 +23,7 @@ connectToMongoDB(process.env.MONGODB_CONNECTION_URL);
 app.set('view engine', 'ejs');
 app.set('views', path.resolve('./views'));
 
-
+app.use(methodOverride('_method'));
 app.use(cookieParser());
 app.use(checkForAuthenticationCookie('token'));
 app.use(express.urlencoded({ extended: false }));
