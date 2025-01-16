@@ -91,24 +91,15 @@ function handleUserSignOut(req, res) {
 
 
 async function handleDisplayUserDashboard(req, res) {
-    if (!req.user) {
-        return res.redirect('/user/signin');
-    }
+    const authorId = req.params.id;
+    const author = await User.findById(authorId);
 
-    const userId = req.user._id;
-
-    const user = await User.findById(userId);
-
-    if (!user) {
-        return res.redirect('/user/signin');
-    }
-
-    const blogs = await Blog.find({ createdBy: req.user._id }).sort({ createdAt: -1 });
-
+    const authorBlogs = await Blog.find({ createdBy: authorId }).sort({ createdAt: -1 });
 
     return res.render('dashboard', {
-        user,
-        blogs,
+        user: req.user,
+        author,
+        authorBlogs,
     });
 }
 

@@ -38,7 +38,7 @@ router.post('/signup', handleUserSignup);
 
 router.get('/signout', handleUserSignOut);
 
-router.get('/dashboard', handleDisplayUserDashboard);
+router.get('/dashboard/:id', handleDisplayUserDashboard);
 
 router.get('/edit', handleEditUserProfilePage);
 
