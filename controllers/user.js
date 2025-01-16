@@ -11,8 +11,28 @@ function handleUserSignupPage(req, res) {
 }
 
 
-function handleUserSignin(req, res) {
-    return res.redirect('/signin');
+async function handleUserSignin(req, res) {
+    const { email, password } = req.body;
+
+    // Step 1: Validate the request body
+    if (!email || !password) {
+        return res.status(400).json({
+            message: 'Email and password are required',
+        });
+    }
+
+    // Step 2: Check the password and get the user if password is correct
+    try {
+        const user = await User.matchPassword(email, password);
+
+        // console.log("Fetched User: ", user);
+        return res.redirect('/');
+
+    } catch (error) {
+        return res.status(400).json({
+            message: `Error signing in: ${error.message}`,
+        });
+    }
 }
 
 
@@ -20,9 +40,9 @@ async function handleUserSignup(req, res) {
     const { fullName, email, password } = req.body;
 
     // Step 1: Validate the request body
-    if (!email || !password) {
+    if (!fullName || !email || !password) {
         return res.status(400).json({
-            message: 'Email and password are required',
+            message: 'Full name, email and password are required',
         });
     }
 
