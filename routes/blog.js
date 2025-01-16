@@ -1,4 +1,3 @@
-const path = require('path');
 const multer = require('multer');
 const express = require('express');
 
@@ -13,9 +12,9 @@ const {
 } = require('../controllers/blog');
 
 
-const storage = multer.diskStorage({
+const blog_storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, `./public/uploads/`);
+        cb(null, `./public/uploads/blog_images`);
     },
     filename: function (req, file, cb) {
         const fileName = `${Date.now()}-${file.originalname}`;
@@ -23,7 +22,7 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({ storage: blog_storage });
 
 
 const router = express.Router();

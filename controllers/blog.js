@@ -14,7 +14,7 @@ function handleCreateNewBlogPage(req, res) {
 
 async function handleCreateNewBlog(req, res) {
     const { title, description, body } = req.body;
-    const coverImageURL = `/uploads/${req.file.filename}`;
+    const coverImageURL = `/uploads/blog_images/${req.file.filename}`;
 
     const blog = await Blog.create({
         title,
@@ -131,7 +131,7 @@ async function handleEditBlog(req, res) {
                 fs.unlinkSync(oldCoverImagePath); // Delete the old file
             }
             // Update the cover image URL in the updateData object
-            updateData.coverImageURL = `/uploads/${req.file.filename}`;
+            updateData.coverImageURL = `/uploads/blog_images/${req.file.filename}`;
         }
 
         // Update the blog with the new data
