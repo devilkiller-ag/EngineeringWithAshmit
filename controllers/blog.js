@@ -160,6 +160,26 @@ async function handleEditBlog(req, res) {
 }
 
 
+async function handleDeleteBlog(req, res) {
+    const id = req.params.id;
+
+    try {
+        const deletedBlog = await Blog.findByIdAndDelete(id);
+
+        if (!deletedBlog) {
+            return res.status(404).render('editBlog', {
+                user: req.user,
+                error: 'Blog not found',
+                blog: null,
+            });
+        }
+
+        return res.redirect('/');
+    } catch (error) {
+        return res.status(500).redirect(`/blog/${id}`);
+    }
+}
+
 
 module.exports = {
     handleCreateNewBlogPage,
@@ -168,4 +188,5 @@ module.exports = {
     handlePostComment,
     handleEditBlogPage,
     handleEditBlog,
+    handleDeleteBlog,
 };

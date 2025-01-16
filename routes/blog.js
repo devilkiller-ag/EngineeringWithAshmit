@@ -9,6 +9,7 @@ const {
     handleCreateNewBlogPage,
     handleEditBlogPage,
     handleEditBlog,
+    handleDeleteBlog,
 } = require('../controllers/blog');
 
 
@@ -31,9 +32,11 @@ router.get('/create-new', handleCreateNewBlogPage);
 
 router.post('/comment/:blogId', handlePostComment);
 
-router.get('/:id', handleDisplayBlog);
-
 router.get('/edit/:id', handleEditBlogPage);
+
+router.get('/delete/:id', handleDeleteBlog);
+
+router.get('/:id', handleDisplayBlog);
 
 router.patch('/:id', upload.single('coverImage'), handleEditBlog);
 
