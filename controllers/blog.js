@@ -1,5 +1,8 @@
 const { marked } = require('marked');
+
 const Blog = require("../models/blog");
+const { formatDateWithOrdinal, formatDateAbbreviated } = require("../services/format_date");
+
 
 function handleCreateNewBlogPage(req, res) {
     return res.render('createBlog', {
@@ -49,6 +52,8 @@ async function handleDisplayBlog(req, res) {
         blog,
         allUserBlogs,
         marked,
+        formatDateWithOrdinal,
+        formatDateAbbreviated,
     });
 }
 
