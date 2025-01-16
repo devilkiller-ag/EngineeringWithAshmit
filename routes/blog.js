@@ -3,12 +3,13 @@ const express = require('express');
 
 const {
     handleDisplayBlog,
-    handlePostComment,
     handleCreateNewBlog,
     handleCreateNewBlogPage,
     handleEditBlogPage,
     handleEditBlog,
     handleDeleteBlog,
+    handlePostComment,
+    handleDeleteComment,
 } = require('../controllers/blog');
 
 
@@ -28,6 +29,8 @@ const upload = multer({ storage: blog_storage });
 const router = express.Router();
 
 router.get('/create-new', handleCreateNewBlogPage);
+
+router.get('/comment/delete/:id', handleDeleteComment);
 
 router.post('/comment/:blogId', handlePostComment);
 

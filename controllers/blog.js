@@ -65,24 +65,6 @@ async function handleDisplayBlog(req, res) {
 }
 
 
-async function handlePostComment(req, res) {
-    const comment = await Comment.create({
-        content: req.body.content,
-        blogId: req.params.blogId,
-        createdBy: req.user._id,
-    });
-
-    if (!comment) {
-        return res.render(`/blog/${req.params.blogId}`, {
-            user: req.user,
-            error: 'Failed to create blog',
-        });
-    }
-
-    res.redirect(`/blog/${req.params.blogId}`);
-}
-
-
 async function handleEditBlogPage(req, res) {
     const id = req.params.id;
 
@@ -181,12 +163,55 @@ async function handleDeleteBlog(req, res) {
 }
 
 
+async function handlePostComment(req, res) {
+    const comment = await Comment.create({
+        content: req.body.content,
+        blogId: req.params.blogId,
+        createdBy: req.user._id,
+    });
+
+    if (!comment) {
+        return res.render(`/blog/${req.params.blogId}`, {
+            user: req.user,
+            error: 'Failed to create blog',
+        });
+    }
+
+    res.redirect(`/blog/${req.params.blogId}`);
+}
+
+
+async function handleDeleteComment(req, res) {
+    const id = req.params.id;
+
+    try {
+        const deletedComment = await Comment.findByIdAndDelete(id);
+
+        const blogId = deletedComment.blogId;
+
+        if (!deletedComment) {
+            return res.status(404).redirect(`/blog/${blogId}`, {
+                user: req.user,
+                error: 'Blog not found',
+                blog: null,
+            });
+        }
+
+        return res.redirect(`/blog/${blogId}`);
+    } catch (error) {
+        return res.status(500).redirect(`/}`);
+    }
+}
+
+
+
 module.exports = {
     handleCreateNewBlogPage,
     handleCreateNewBlog,
     handleDisplayBlog,
-    handlePostComment,
     handleEditBlogPage,
     handleEditBlog,
     handleDeleteBlog,
+    handlePostComment,
+    handleDeleteComment,
 };
