@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { createHmac, randomBytes } = require('crypto');
+const { createTokenForUser } = require('../services/authentication');
 
 
 const userSchema = new mongoose.Schema({
@@ -55,7 +56,7 @@ userSchema.pre('save', function (next) {
 });
 
 
-userSchema.static('matchPassword', async function (email, password) {
+userSchema.static('matchPasswordAndGenerateSessionToken', async function (email, password) {
     // This function is used to compare the password provided by the user with the hashed password stored in the database.
 
     // Find the user by email
@@ -73,9 +74,10 @@ userSchema.static('matchPassword', async function (email, password) {
         .update(password)
         .digest('hex');
 
-    // Compare the hashed password with the hash of user provided password
+    // Compare the hashed password with the hash of user provided password and return the session token if they match
     if (hashedPassword === userProvidedPasswordHash) {
-        return { ...user._doc, password: undefined, salt: undefined };
+        const session_token = createTokenForUser(user);
+        return session_token;
     } else {
         throw new Error('Invalid password');
     }

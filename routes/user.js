@@ -5,6 +5,7 @@ const {
     handleUserSignupPage,
     handleUserSignin,
     handleUserSignup,
+    handleUserSignOut,
 } = require('../controllers/user');
 
 
@@ -19,5 +20,6 @@ router.post('/signin', handleUserSignin);
 
 router.post('/signup', handleUserSignup);
 
+router.get('/signout', handleUserSignOut);
 
 module.exports = router;

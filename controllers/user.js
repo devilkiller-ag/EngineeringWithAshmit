@@ -2,12 +2,16 @@ const User = require("../models/user");
 
 
 function handleUserSigninPage(req, res) {
-    return res.render('signin');
+    return res.render('signin', {
+        user: req.user,
+    });
 }
 
 
 function handleUserSignupPage(req, res) {
-    return res.render('signup');
+    return res.render('signup', {
+        user: req.user,
+    });
 }
 
 
@@ -21,16 +25,16 @@ async function handleUserSignin(req, res) {
         });
     }
 
-    // Step 2: Check the password and get the user if password is correct
+    // Step 2: Check the password and get the session token if password is correct
     try {
-        const user = await User.matchPassword(email, password);
+        const session_token = await User.matchPasswordAndGenerateSessionToken(email, password);
 
-        // console.log("Fetched User: ", user);
-        return res.redirect('/');
+        return res.cookie('token', session_token).redirect('/');
 
     } catch (error) {
-        return res.status(400).json({
-            message: `Error signing in: ${error.message}`,
+        return res.render('signin', {
+            user: req.user,
+            error: `Error signing in: ${error.message}`
         });
     }
 }
@@ -72,9 +76,15 @@ async function handleUserSignup(req, res) {
 }
 
 
+function handleUserSignOut(req, res) {
+    return res.clearCookie('token').redirect('/');
+}
+
+
 module.exports = {
     handleUserSigninPage,
     handleUserSignupPage,
     handleUserSignin,
     handleUserSignup,
+    handleUserSignOut,
 };
