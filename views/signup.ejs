@@ -6,26 +6,31 @@
   <title>Sign up | Engineering With Ashmit</title>
 </head>
 
-<body>
+<body class="w-full h-full flex flex-col justify-center bg-gray-100 dark:bg-gray-900">
   <%- include('./partials/nav') %>
 
-  <div class="container mt-4">
-    <form aaction="/user/signup" method="POST">
-      <div class="mb-3">
-        <label for="fullName" class="form-label">Full Name</label>
-        <input type="text" class="form-control" id="fullName" name="fullName">
-      </div>
-      <div class="mb-3">
-        <label for="email" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-      </div>
-      <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" name="password">
-      </div>
-      <button type="submit" class="btn btn-primary">Sign Up</button>
-    </form>
+  <div class="w-full h-full flex items-center justify-center pt-16 pb-16">
+    <div class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+      <form class="space-y-6" action="/user/signup" method="POST">
+        <h5 class="text-xl font-medium text-gray-900 dark:text-white">Create Account</h5>
+        <div>
+          <label for="fullName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Full name</label>
+          <input type="text" name="fullName" id="fullName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Type your name" required />
+        </div>
+        <div>
+          <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email address</label>
+          <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Type your email" required />
+        </div>
+        <div>
+          <label for="passwor bg-blue-600d" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
+          <input type="password" name="password" id="password" placeholder="Type your password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
+        </div>
+        <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create your account</button>
+        <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
+          Already registered? <a href="/user/signin" class="text-blue-700 hover:underline dark:text-blue-500">Sign In</a>
+        </div>
+      </form>
+    </div>
   </div>
 
   <%- include('./partials/scripts') %>
