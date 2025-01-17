@@ -167,7 +167,7 @@ async function handleEditUserProfile(req, res) {
         const updatedUser = await User.findByIdAndUpdate(userId, updateData, { new: true });
 
         // If the update is successful, redirect to the updated blog's detail page
-        return res.redirect(`/user/dashboard`);
+        return res.redirect(`/user/dashboard/${userId}`);
     } catch (error) {
         console.error('Error updating blog:', error);
 
