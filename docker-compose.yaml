@@ -1,0 +1,25 @@
+version: '3.9' # Use the latest version if possible for better features and compatibility
+services:
+  engineeringwithashmit:
+    build: . # Build the app using the Dockerfile in the current directory
+    # image: devilkillerag/engineeringwithashmit:0.0.1.RELEASE # Pull from Docker Hub
+    ports:
+      - "8001:8000"
+    environment:
+      MONGODB_CONNECTION_URL: mongodb://mongodb:27017/eng-with-ashmit
+      JWT_SECRET: mysecretkey
+      PORT: 8000
+    depends_on:
+      - mongodb # Ensure MongoDB starts before the app
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    restart: always
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo_data:/data/db # Persist MongoDB data across container restarts
+
+volumes:
+  mongo_data: # Define the volume for MongoDB data
