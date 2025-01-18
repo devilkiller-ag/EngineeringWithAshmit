@@ -45,3 +45,29 @@ Open [http://localhost:8001](http://localhost:8001) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
+
+
+## Available Scripts for Docker
+#### Prerequisites:
+- [install Docker](https://docs.docker.com/get-docker/)
+- [install Docker Compose](https://docs.docker.com/compose/install/)
+
+After cloning repository to your local, perform the following steps from the root of the repository.
+
+#### Steps to build and run local docker image:
+1. Build the Docker image and run the container:
+    ```bash 
+    docker compose up
+    ```
+2. Open [http://localhost:8001](http://localhost:8001) to view it in your browser.
+
+#### Steps to build and run docker image from dockerhub:
+1. Pull the image from dockerhub:
+    ```bash
+    docker pull devilkillerag/engineeringwithashmit:latest
+    ```
+2. Run the container:
+    ```bash
+    docker run -p 8001:8001 devilkillerag/engineeringwithashmit:latest
+    ```
+3. Open [http://localhost:8001](http://localhost:8001) to view it in your browser.
