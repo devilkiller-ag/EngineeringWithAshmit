@@ -1,5 +1,10 @@
+const fs = require('fs');
+const path = require('path');
+
 const User = require("../models/user");
 const Blog = require("../models/blog");
+const { uploadFileOnCloudinary, deleteFileFromCloudinary } = require('../services/cloudinary');
+const DEFAULT_PROFILE_IMAGES = require('../lib/default_profile_images');
 
 
 function handleUserSigninPage(req, res) {
@@ -131,7 +136,7 @@ async function handleEditUserProfile(req, res) {
     const userId = req.user._id;
     const { fullName, email } = req.body;
 
-    if (!fullName || !email) {
+    if ([fullName, email].some((field) => field?.trim() === '')) {
         return res.status(400).json({
             message: 'Full name and email are required',
         });
@@ -153,14 +158,25 @@ async function handleEditUserProfile(req, res) {
 
         // If a new profile image is uploaded, delete the old cover image file
         if (req.file) {
-            const fs = require('fs');
-            const path = require('path');
-            const oldProfileImagePath = path.join(__dirname, '..', 'public', 'uploads', 'profile_images', existingUser.profileImageURL);
-            if (fs.existsSync(oldProfileImagePath)) {
-                fs.unlinkSync(oldProfileImagePath); // Delete the old file
+            const profileImageLocalPath = req.file.path;
+
+            const profileImage = await uploadFileOnCloudinary(profileImageLocalPath, 'engineering_with_ashmit/profile_images');
+
+            if (!profileImage) {
+                return res.status(500).redirect(`/user/dashboard/${userId}`);
             }
-            // Update the profile image URL in the updateData object
-            updateData.profileImageURL = `/uploads/profile_images/${req.file.filename}`;
+
+            // Delete the local file
+            if (fs.existsSync(profileImageLocalPath)) {
+                fs.unlinkSync(profileImageLocalPath);
+            }
+
+            // Delete the old profile image from Cloudinary
+            if (!DEFAULT_PROFILE_IMAGES.includes(existingUser.profileImageURL)) {
+                await deleteFileFromCloudinary(existingUser.profileImageURL);
+            }
+
+            updateData.profileImageURL = profileImage.secure_url;
         }
 
         // Update the user with the new data
@@ -171,7 +187,7 @@ async function handleEditUserProfile(req, res) {
     } catch (error) {
         console.error('Error updating blog:', error);
 
-        return res.status(500).redirect(`/user/dashboard`);
+        return res.status(500).redirect(`/user/dashboard/${userId}`);
     }
 
 }

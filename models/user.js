@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const { createHmac, randomBytes } = require('crypto');
-const { createTokenForUser } = require('../services/authentication');
 
+const { createTokenForUser } = require('../services/authentication');
+const DEFAULT_PROFILE_IMAGES = require('../lib/default_profile_images');
 
 const userSchema = new mongoose.Schema({
     fullName: {
@@ -22,7 +23,7 @@ const userSchema = new mongoose.Schema({
     },
     profileImageURL: {
         type: String,
-        default: `/images/avatars/avatar_${Math.floor((Math.random() * 6) + 1)}.png`,
+        default: DEFAULT_PROFILE_IMAGES[Math.floor(Math.random() * DEFAULT_PROFILE_IMAGES.length)],
     },
     role: {
         type: String,

@@ -1,7 +1,9 @@
+const fs = require('fs');
 const { marked } = require('marked');
 
 const Blog = require("../models/blog");
 const Comment = require('../models/comment');
+const { uploadFileOnCloudinary, deleteFileFromCloudinary } = require('../services/cloudinary');
 const { formatDateStandard, formatDateWithOrdinal, formatDateAbbreviated } = require("../services/format_date");
 
 
@@ -14,8 +16,24 @@ function handleCreateNewBlogPage(req, res) {
 
 async function handleCreateNewBlog(req, res) {
     const { title, description, body } = req.body;
-    const coverImageURL = `/uploads/blog_images/${req.file.filename}`;
+    const coverImageLocalPath = req.file.path;
 
+    // Upload the cover image to Cloudinary
+    const blogCoverImage = await uploadFileOnCloudinary(coverImageLocalPath, 'engineering_with_ashmit/blog_cover_images');
+
+    if (!blogCoverImage) {
+        return res.render('createBlog', {
+            user: req.user,
+            error: 'Failed to create blog',
+        });
+    }
+
+    if (fs.existsSync(coverImageLocalPath)) {
+        fs.unlinkSync(coverImageLocalPath); // Delete the local file
+    }
+
+    // Create a new blog
+    const coverImageURL = blogCoverImage.secure_url;
     const blog = await Blog.create({
         title,
         body,
@@ -23,7 +41,6 @@ async function handleCreateNewBlog(req, res) {
         description,
         createdBy: req.user._id,
     });
-
 
     if (!blog) {
         return res.render('createBlog', {
@@ -106,14 +123,25 @@ async function handleEditBlog(req, res) {
 
         // If a new cover image is uploaded, delete the old cover image file
         if (req.file) {
-            const fs = require('fs');
-            const path = require('path');
-            const oldCoverImagePath = path.join(__dirname, '..', 'public', existingBlog.coverImageURL);
-            if (fs.existsSync(oldCoverImagePath)) {
-                fs.unlinkSync(oldCoverImagePath); // Delete the old file
+            const coverImageLocalPath = req.file.path;
+
+            const blogCoverImage = await uploadFileOnCloudinary(coverImageLocalPath, 'engineering_with_ashmit/blog_cover_images');
+
+            if (!blogCoverImage) {
+                return res.status(500).redirect(`/blog/${id}`);
             }
-            // Update the cover image URL in the updateData object
-            updateData.coverImageURL = `/uploads/blog_images/${req.file.filename}`;
+
+            // Delete the local file
+            if (fs.existsSync(coverImageLocalPath)) {
+                fs.unlinkSync(coverImageLocalPath);
+            }
+
+            // Delete the old profile image from Cloudinary
+            if (existingBlog.coverImageURL) {
+                await deleteFileFromCloudinary(existingBlog.coverImageURL);
+            }
+
+            updateData.coverImageURL = blogCoverImage.secure_url;
         }
 
         // Update the blog with the new data
