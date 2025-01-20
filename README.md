@@ -1,15 +1,19 @@
-# Engineering With Ashmit
-A bloging application for Ashmit JaiSarita Gupta wher he can share  engineering stuffs he learns and do.
+<div style="text-align: center;">
+    <img src="./public/EngineeringWithAshmit.png" alt="Engineering With Ashmit" style="width: 80%; height: 80%;"/>
+    <h1>Engineering With Ashmit</h1>
+    <p>A blogging application for Ashmit JaiSarita Gupta where he can share engineering stuffs he learns and does.</p>
+</div>
 
-- The site is live [here](https://engineeringwithashmit.ashmit.dev/).
+## Visit the site
+The site is live [here](https://engineeringwithashmit.ashmit.dev/).
 
 ## Features
 - An Express.js application for sharing my blogs with complete server-side rendering and dynamic content delivery.
 - RESTful APIs for managing blogs, user authentication, and dynamic content delivery following MVC pattern.
 - Utilizes EJS templating engines and Flowbite to create server-side rendered UI and MongoDB to store application Data.
 - Utilizes Marked.js to convert markdown to HTML for blog content.
-- User can create account and login to the application.
-- User can create, edit and delete blogs.
+- User can create an account and log into the application.
+- User can create, edit, and delete blogs.
 - Users can add or remove comments in any blog.
 - User dashboard to manage and showcase blogs.
 - Profile page to manage user information.
@@ -52,7 +56,7 @@ You may also see any lint errors in the console.
 - [install Docker](https://docs.docker.com/get-docker/)
 - [install Docker Compose](https://docs.docker.com/compose/install/)
 
-After cloning repository to your local, perform the following steps from the root of the repository.
+After cloning the repository to your local, perform the following steps from the root of the repository.
 
 #### Steps to build and run local docker image:
 1. Build the Docker image and run the container:
