@@ -31,12 +31,12 @@ app.use(express.static(path.resolve('./public')));
 
 
 app.get('/', async (req, res) => {
-    const allBlogs = await Blog.find({}).sort({ createdAt: -1 });
+  const allBlogs = await Blog.find({}).sort({ createdAt: -1 });
 
-    return res.render('home', {
-        user: req.user,
-        blogs: allBlogs,
-    });
+  return res.render('home', {
+    user: req.user,
+    blogs: allBlogs,
+  });
 });
 
 
@@ -45,5 +45,5 @@ app.use('/blog', blogRoute);
 
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT} at http://localhost:${PORT}`);
+  console.log(`Server is running on port ${PORT} at http://localhost:${PORT}`);
 });

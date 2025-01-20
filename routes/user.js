@@ -1,14 +1,14 @@
 const express = require('express');
 
 const {
-    handleUserSigninPage,
-    handleUserSignupPage,
-    handleUserSignin,
-    handleUserSignup,
-    handleUserSignOut,
-    handleDisplayUserDashboard,
-    handleEditUserProfilePage,
-    handleEditUserProfile,
+  handleUserSigninPage,
+  handleUserSignupPage,
+  handleUserSignin,
+  handleUserSignup,
+  handleUserSignOut,
+  handleDisplayUserDashboard,
+  handleEditUserProfilePage,
+  handleEditUserProfile,
 } = require('../controllers/user');
 const upload = require('../middlewares/multer');
 

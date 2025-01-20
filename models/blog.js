@@ -2,27 +2,27 @@ const mongoose = require('mongoose');
 
 
 const blogSchema = new mongoose.Schema({
-    title: {
-        type: String,
-        required: true,
-    },
-    description: {
-        type: String,
-        required: false,
-    },
-    body: {
-        type: String,
-        required: true,
-    },
-    coverImageURL: {
-        type: String,
-        required: false,
-    },
-    createdBy: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'user',
-        required: true,
-    }
+  title: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: false,
+  },
+  body: {
+    type: String,
+    required: true,
+  },
+  coverImageURL: {
+    type: String,
+    required: false,
+  },
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'user',
+    required: true,
+  }
 }, { timestamps: true });
 
 

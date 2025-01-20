@@ -1,14 +1,14 @@
 const express = require('express');
 
 const {
-    handleDisplayBlog,
-    handleCreateNewBlog,
-    handleCreateNewBlogPage,
-    handleEditBlogPage,
-    handleEditBlog,
-    handleDeleteBlog,
-    handlePostComment,
-    handleDeleteComment,
+  handleDisplayBlog,
+  handleCreateNewBlog,
+  handleCreateNewBlogPage,
+  handleEditBlogPage,
+  handleEditBlog,
+  handleDeleteBlog,
+  handlePostComment,
+  handleDeleteComment,
 } = require('../controllers/blog');
 const upload = require('../middlewares/multer');
 
