@@ -1,6 +1,6 @@
 {
   "name": "engineering-with-ashmit",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A bloging application for Ashmit JaiSarita Gupta wher he can share  engineering stuffs he learns and do.",
   "main": "index.js",
   "scripts": {
@@ -20,7 +20,7 @@
   "bugs": {
     "url": "https://github.com/devilkiller-ag/EngineeringWithAshmit/issues"
   },
-  "homepage": "https://github.com/devilkiller-ag/EngineeringWithAshmit/README.md",
+  "homepage": "https://engineeringwithashmit.ashmit.dev/",
   "dependencies": {
     "cloudinary": "^2.5.1",
     "cookie-parser": "^1.4.7",

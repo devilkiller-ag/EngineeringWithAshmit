@@ -75,3 +75,14 @@ After cloning the repository to your local, perform the following steps from the
     docker run -p 8001:8001 devilkillerag/engineeringwithashmit:latest
     ```
 3. Open [http://localhost:8001](http://localhost:8001) to view it in your browser.
+
+
+#### Steps to build a new version and upload to docker hub:
+1. Build the Docker image:
+    ```bash
+    docker build -t devilkillerag/engineeringwithashmit:<version_name> .
+    ```
+2. Push the image to docker hub:
+    ```bash
+    ddocker push devilkillerag/engineeringwithashmit:<version_name>
+    ```
